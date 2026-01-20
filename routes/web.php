@@ -1,13 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ChirpController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Chirper\ChirpController;
+use App\Http\Controllers\Chirper\ProfileController;
 use App\Http\Controllers\Auth\Register;
 use App\Http\Controllers\Auth\Login;
 use App\Http\Controllers\Auth\Logout;
 
-Route::get('/', [ChirpController::class, 'index']);
+Route::view('/', 'home')->name('home');
+
+Route::get('/chirper', [ChirpController::class, 'index'])
+    ->name('chirper.home');
 
 Route::middleware('auth')->group(function () {
     Route::post('/chirps', [ChirpController::class, 'store']);

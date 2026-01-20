@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Chirper;
 
+use App\Http\Controllers\Controller;
 use App\Models\Chirp;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class ChirpController extends Controller
         ->take(50)
         ->get();
     
-        return view('home', ['chirps' => $chirps]);
+        return view('chirper.home', ['chirps' => $chirps]);
     }
 
     /**
@@ -44,7 +45,7 @@ class ChirpController extends Controller
 
         auth()->user()->chirps()->create($validated);
 
-        return redirect('/')->with('success', 'Your chirp has been posted!');
+        return redirect()->route('chirper.home')->with('success', 'Your chirp has been posted!');
     }
 
     /**
@@ -85,8 +86,8 @@ class ChirpController extends Controller
     
         // Update
         $chirp->update($validated);
-    
-        return redirect('/')->with('success', 'Chirp updated!');
+
+        return redirect()->route('chirper.home')->with('success', 'Chirp updated!');
     }
 
     /**
@@ -99,7 +100,7 @@ class ChirpController extends Controller
         }
 
         $chirp->delete();
-    
-        return redirect('/')->with('success', 'Chirp deleted!');
+
+        return redirect()->route('chirper.home')->with('success', 'Chirp deleted!');
     }
 }

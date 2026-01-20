@@ -80,7 +80,7 @@
 
                 <ul class="menu px-3">
                     <li>
-                        <a href="/" class="active">
+                        <a href="/chirper" class="active">
                             🐦 Chirper
                         </a>
                     </li>
