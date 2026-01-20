@@ -64,7 +64,7 @@ class ChirpController extends Controller
             abort(403, 'Unauthorized');
         }
     
-        return view('chirps.edit', compact('chirp'));
+        return view('chirper.chirps.edit', compact('chirp'));
     }
 
     /**

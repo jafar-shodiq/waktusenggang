@@ -14,7 +14,7 @@
         <!-- Chirps -->
         <div class="space-y-4">
             @forelse ($user->chirps as $chirp)
-                <x-chirp :chirp="$chirp" />
+                <x-chirper.chirp :chirp="$chirp" />
             @empty
                 <p class="text-gray-500">
                     This user has not chirped yet.

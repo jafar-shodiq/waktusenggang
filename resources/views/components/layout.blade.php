@@ -11,45 +11,92 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-screen flex flex-col bg-base-200 font-sans">
-    <nav class="navbar bg-base-100">
-        <div class="navbar-start">
-            <a href="/" class="btn btn-ghost text-xl">🐦 Chirper</a>
-        </div>
-        <div class="navbar-end gap-2">
-            @auth
-                <span class="text-sm">{{ auth()->user()->name }}</span>
-                <form method="POST" action="/logout" class="inline">
-                    @csrf
-                    <button type="submit" class="btn btn-ghost btn-sm">Logout</button>
-                </form>
-            @else
-                <a href="/login" class="btn btn-ghost btn-sm">Sign In</a>
-                <a href="{{ route('register') }}" class="btn btn-primary btn-sm">Sign Up</a>
-            @endauth
-        </div>
-    </nav>
+<body class="min-h-screen bg-base-200 font-sans">
 
-    <!-- Success Toast -->
-    @if (session('success'))
-        <div class="toast toast-top toast-center">
-            <div class="alert alert-success animate-fade-out">
-                <svg xmlns="<http://www.w3.org/2000/svg>" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>{{ session('success') }}</span>
-            </div>
-        </div>
-    @endif
+    <div class="drawer">
+        <input id="project-drawer" type="checkbox" class="drawer-toggle" />
 
-    <main class="flex-1 container mx-auto px-4 py-8">
-        {{ $slot }}
-    </main>
+        <!-- Page content -->
+        <div class="drawer-content flex flex-col">
 
-    <footer class="footer footer-center p-5 bg-base-300 text-base-content text-xs">
-        <div>
-            <p>© {{ date('Y') }} Chirper - Built with Laravel and ❤️</p>
+            <!-- Navbar -->
+            <nav class="navbar bg-base-100">
+                <div class="navbar-start gap-2">
+
+                    <!-- Hamburger -->
+                    <label for="project-drawer" class="btn btn-ghost btn-sm">
+                        ☰
+                    </label>
+
+                    <a href="/" class="btn btn-ghost text-xl">JShodiq</a>
+                </div>
+
+                <div class="navbar-end gap-2">
+                    @auth
+                        <span class="text-sm">{{ auth()->user()->name }}</span>
+                        <form method="POST" action="/logout" class="inline">
+                            @csrf
+                            <button type="submit" class="btn btn-ghost btn-sm">
+                                Logout
+                            </button>
+                        </form>
+                    @else
+                        <a href="/login" class="btn btn-ghost btn-sm">Sign In</a>
+                        <a href="{{ route('register') }}" class="btn btn-primary btn-sm">
+                            Sign Up
+                        </a>
+                    @endauth
+                </div>
+            </nav>
+
+            <!-- Success Toast -->
+            @if (session('success'))
+                <div class="toast toast-top toast-center">
+                    <div class="alert alert-success animate-fade-out">
+                        <span>{{ session('success') }}</span>
+                    </div>
+                </div>
+            @endif
+
+            <!-- Main -->
+            <main class="flex-1 container mx-auto px-4 py-8">
+                {{ $slot }}
+            </main>
+
+            <!-- Footer -->
+            <footer class="footer footer-center p-5 bg-base-300 text-base-content text-xs">
+                <p>© {{ date('Y') }} Chirper - Built with Laravel and ❤️</p>
+            </footer>
         </div>
-    </footer>
+
+        <!-- Sidebar -->
+        <div class="drawer-side">
+            <label for="project-drawer" class="drawer-overlay"></label>
+
+            <aside class="w-64 bg-base-100 min-h-full">
+                <div class="p-4 font-semibold text-lg">
+                    Projects
+                </div>
+
+                <ul class="menu px-3">
+                    <li>
+                        <a href="/" class="active">
+                            🐦 Chirper
+                        </a>
+                    </li>
+
+                    <li class="disabled">
+                        <span>📋 Tasks (soon)</span>
+                    </li>
+
+                    <li class="disabled">
+                        <span>📝 Blog (soon)</span>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+    </div>
+
 </body>
+
 </html>
