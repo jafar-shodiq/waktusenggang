@@ -18,7 +18,7 @@ class ChirpController extends Controller
         ->take(50)
         ->get();
     
-        return view('chirper.home', ['chirps' => $chirps]);
+        return view('view_chirper.view-home-chirper', ['chirps' => $chirps]);
     }
 
     /**
@@ -45,7 +45,7 @@ class ChirpController extends Controller
 
         auth()->user()->chirps()->create($validated);
 
-        return redirect()->route('chirper.home')->with('success', 'Your chirp has been posted!');
+        return redirect()->route('route_chirper.route_home')->with('success', 'Your chirp has been posted!');
     }
 
     /**
@@ -87,7 +87,7 @@ class ChirpController extends Controller
         // Update
         $chirp->update($validated);
 
-        return redirect()->route('chirper.home')->with('success', 'Chirp updated!');
+        return redirect()->route('route_chirper.home')->with('success', 'Chirp updated!');
     }
 
     /**

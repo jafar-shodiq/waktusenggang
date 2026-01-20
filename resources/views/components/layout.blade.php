@@ -80,7 +80,7 @@
 
                 <ul class="menu px-3">
                     <li>
-                        <a href="/chirper" class="active">
+                        <a href="{{ route('route_chirper.route_home') }}" class="active">
                             🐦 Chirper
                         </a>
                     </li>

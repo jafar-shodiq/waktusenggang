@@ -11,6 +11,6 @@ class ProfileController extends Controller
     public function show(User $user)
     {
         $user->load('chirps.user');
-        return view('chirper.profile.show', ['user' => $user]);
+        return view('view_chirper.show-chirps-in-profile', ['user' => $user]);
     }
 }

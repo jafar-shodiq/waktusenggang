@@ -10,7 +10,7 @@
         <!-- Chirp Form -->
         <div class="card bg-base-100 shadow mt-8">
             <div class="card-body">
-                <form method="POST" action="/chirps">
+                <form method="POST" action="{{ route('route_chirper.route_chirps.route_store') }}">
                     @csrf
                     <div class="form-control w-full">
                         <textarea
@@ -39,7 +39,7 @@
         <!-- Feed -->
         <div class="space-y-4 mt-8">
             @forelse ($chirps as $chirp)
-                <x-chirper.chirp :chirp="$chirp" />
+                <x-component-chirp :passed_var_chirp="$chirp" />
             @empty
                 <div class="hero py-12">
                     <div class="hero-content text-center">

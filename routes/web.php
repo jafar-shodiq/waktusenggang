@@ -7,17 +7,40 @@ use App\Http\Controllers\Auth\Register;
 use App\Http\Controllers\Auth\Login;
 use App\Http\Controllers\Auth\Logout;
 
-Route::view('/', 'home')->name('home');
+Route::view('/', 'home')
+    ->name('home');
 
-Route::get('/chirper', [ChirpController::class, 'index'])
-    ->name('chirper.home');
+// No need auth
+Route::prefix('url_chirper')
+    ->name('route_chirper.')
+    ->group(function () {
 
-Route::middleware('auth')->group(function () {
-    Route::post('/chirps', [ChirpController::class, 'store']);
-    Route::get('/chirps/{chirp}/edit', [ChirpController::class, 'edit']);
-    Route::put('/chirps/{chirp}', [ChirpController::class, 'update']);
-    Route::delete('/chirps/{chirp}', [ChirpController::class, 'destroy']);
+        Route::get('/profile/{user}', [ProfileController::class, 'show'])
+            ->name('route_profile.route_show');
 });
+
+// Need auth
+Route::prefix('url_chirper')
+    ->middleware('auth')
+    ->name('route_chirper.')
+    ->group(function () {
+
+        Route::get('/', [ChirpController::class, 'index'])
+            ->name('route_home');
+
+        Route::post('/chirps', [ChirpController::class, 'store'])
+            ->name('route_chirps.route_store');
+
+        Route::get('/chirps/{chirp}/edit', [ChirpController::class, 'edit'])
+            ->name('route_chirps.route_edit');
+
+        Route::put('/chirps/{chirp}', [ChirpController::class, 'update'])
+            ->name('route_chirps.route_update');
+
+        Route::delete('/chirps/{chirp}', [ChirpController::class, 'destroy'])
+            ->name('route_chirps.route_destroy');
+});
+
 
 Route::view('/register', 'auth.register')
     ->middleware('guest')
