@@ -36,7 +36,9 @@
             </div>
         </div>
 
-        <!-- Middle Util -->
+        <x-component-search-bar :action="route('route_chirper.route_home')" placeholder="Search profiles or chirps..." />
+
+        <!-- Middle Util
         <div class="flex flex-col items-end mt-6">
             <div class="flex items-center gap-2">
                 
@@ -72,10 +74,15 @@
                     </label>
                 </form>
             </div>
-        </div>
+        </div> -->
 
         <!-- Feed -->
         <div class="space-y-4 mt-8">
+
+            <div class="mt-8">
+                {{ $chirps->links() }}
+            </div>
+
             @forelse ($chirps as $chirp)
                 <x-component-chirp :passed_var_chirp="$chirp" />
             @empty
@@ -90,6 +97,14 @@
                     </div>
                 </div>
             @endforelse
+
+            <div class="mt-8">
+                    {{ $chirps->links() }}
+            </div>
         </div>
+
+
+
+
     </div>
 </x-layout>

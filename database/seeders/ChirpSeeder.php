@@ -33,12 +33,26 @@ class ChirpSeeder extends Seeder
 
         // Sample chirps
         $chirps = [
-            'Just discovered Laravel - where has this been all my life? 🚀',
-            'Building something cool with Chirper today!',
-            'Laravel\'s Eloquent ORM is pure magic ✨',
-            'Deployed my first app with Laravel Cloud. So smooth!',
-            'Who else is loving Blade components?',
-            'Friday deploys with Laravel? No problem! 😎',
+                'Just discovered Laravel - where has this been all my life? 🚀',
+                'Building something cool with Chirper today!',
+                'Laravel\'s Eloquent ORM is pure magic ✨',
+                'Deployed my first app with Laravel Cloud. So smooth!',
+                'Who else is loving Blade components?',
+                'Friday deploys with Laravel? No problem! 😎',
+                'Middleware is such a lifesaver for authentication.',
+                'Learning about Service Containers today. Mind = blown.',
+                'Just wrote my first custom Blade directive!',
+                'Laravel Herd makes local development so fast.',
+                'Is there anything cleaner than Laravel validation syntax?',
+                'Tinker is my favorite tool for debugging quickly.',
+                'Database migrations are a gift from the heavens.',
+                'Just set up my first Scheduled Task in Laravel.',
+                'Love how easy it is to send emails with Mailables.',
+                'The Laravel community is the best in tech.',
+                'Has anyone tried the new Vite integration yet?',
+                'Polymorphic relationships are confusing but powerful.',
+                'Finally mastering Eloquent subqueries!',
+                'Chirper is coming along great, almost ready to launch!'
         ];
 
         // Create chirps for random users

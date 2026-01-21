@@ -22,8 +22,9 @@ class ChirpController extends Controller
                 });
         })
         ->latest()
-        ->take(50)
-        ->get();
+        ->paginate(10)
+        ->onEachSide(1)
+        ->withQueryString();
     
         return view('view_chirper.view-home-chirper', ['chirps' => $chirps]);
     }

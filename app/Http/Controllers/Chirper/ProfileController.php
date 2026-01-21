@@ -8,9 +8,22 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    public function show(User $user)
+    public function show(Request $request, User $user)
     {
-        $user->load('chirps.user');
-        return view('view_chirper.show-chirps-in-profile', ['user' => $user]);
+        $chirps = $user->chirps()
+            ->with('user')
+            ->when($request->search, function ($query, $search) {
+                // Only search within THIS user's chirps
+                return $query->where('message', 'like', '%' . $search . '%');
+            })
+            ->latest()
+            ->paginate(10)
+            ->onEachSide(1)
+            ->withQueryString();
+
+        return view('view_chirper.show-chirps-in-profile', [
+            'user' => $user,
+            'chirps' => $chirps
+        ]);
     }
 }
