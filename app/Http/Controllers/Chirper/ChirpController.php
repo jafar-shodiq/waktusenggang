@@ -11,9 +11,16 @@ class ChirpController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $chirps = Chirp::with('user')
+        ->when($request->search, function ($query, $search) {
+            return $query
+            ->where('message', 'like', '%' . $search . '%')
+            ->orWhereHas('user', function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%');
+                });
+        })
         ->latest()
         ->take(50)
         ->get();
