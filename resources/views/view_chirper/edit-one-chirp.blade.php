@@ -9,7 +9,7 @@
 
         <div class="card bg-base-100 shadow mt-8">
             <div class="card-body">
-                <form method="POST" action="{{ route('route_chirper.chirps.update', $chirp) }}">
+                <form method="POST" action="{{ route('route_chirper.route_chirps.route_update', $url_chirp_id) }}">
                     @csrf
                     @method('PUT')
 
@@ -20,7 +20,7 @@
                             rows="4"
                             maxlength="255"
                             required
-                        >{{ old('message', $chirp->message) }}</textarea>
+                        >{{ old('message', $url_chirp_id->message) }}</textarea>
 
                         @error('message')
                             <div class="label">

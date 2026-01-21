@@ -59,21 +59,21 @@ class ChirpController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Chirp $chirp)
+    public function edit(Chirp $url_chirp_id)
     {
-        if ($chirp->user_id !== auth()->id()) {
+        if ($url_chirp_id->user_id !== auth()->id()) {
             abort(403, 'Unauthorized');
         }
     
-        return view('chirper.chirps.edit', compact('chirp'));
+        return view('view_chirper.edit-one-chirp', compact('url_chirp_id'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Chirp $chirp)
+    public function update(Request $request, Chirp $url_chirp_id)
     {
-        if ($chirp->user_id !== auth()->id()) {
+        if ($url_chirp_id->user_id !== auth()->id()) {
             abort(403, 'Unauthorized');
         }
 
@@ -85,22 +85,22 @@ class ChirpController extends Controller
         ]);
     
         // Update
-        $chirp->update($validated);
+        $url_chirp_id->update($validated);
 
-        return redirect()->route('route_chirper.home')->with('success', 'Chirp updated!');
+        return redirect()->route('route_chirper.route_home')->with('success', 'Chirp updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Chirp $chirp)
+    public function destroy(Chirp $url_chirp_id)
     {
-        if ($chirp->user_id !== auth()->id()) {
+        if ($url_chirp_id->user_id !== auth()->id()) {
             abort(403, 'Unauthorized');
         }
 
-        $chirp->delete();
+        $url_chirp_id->delete();
 
-        return redirect()->route('chirper.home')->with('success', 'Chirp deleted!');
+        return redirect()->route('route_chirper.route_home')->with('success', 'Chirp deleted!');
     }
 }

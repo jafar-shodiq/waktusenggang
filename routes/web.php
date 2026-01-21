@@ -31,13 +31,13 @@ Route::prefix('url_chirper')
         Route::post('/chirps', [ChirpController::class, 'store'])
             ->name('route_chirps.route_store');
 
-        Route::get('/chirps/{chirp}/edit', [ChirpController::class, 'edit'])
+        Route::get('/chirps/{url_chirp_id}/edit', [ChirpController::class, 'edit'])
             ->name('route_chirps.route_edit');
 
-        Route::put('/chirps/{chirp}', [ChirpController::class, 'update'])
+        Route::put('/chirps/{url_chirp_id}', [ChirpController::class, 'update'])
             ->name('route_chirps.route_update');
 
-        Route::delete('/chirps/{chirp}', [ChirpController::class, 'destroy'])
+        Route::delete('/chirps/{url_chirp_id}', [ChirpController::class, 'destroy'])
             ->name('route_chirps.route_destroy');
 });
 

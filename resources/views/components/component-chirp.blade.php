@@ -43,7 +43,7 @@
                             class="btn btn-ghost btn-xs">
                                 Edit
                             </a>
-                            <form method="POST" action="/passed_var_chirp/{{ $passed_var_chirp->id }}">
+                            <form method="POST" action="{{ route('route_chirper.route_chirps.route_destroy', $passed_var_chirp) }}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
