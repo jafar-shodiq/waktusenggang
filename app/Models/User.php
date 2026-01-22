@@ -66,4 +66,12 @@ class User extends Authenticatable
         // Return null so the frontend can display the SVG placeholder instead
         return null;
     }
+
+    public function likedChirps()
+    {
+        // A user can like many chirps
+        return $this->belongsToMany(Chirp::class, 'chirp_likes')
+                    ->withTimestamps()
+                    ->latest('chirp_likes.created_at');
+    }
 }

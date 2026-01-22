@@ -11,7 +11,8 @@ class ProfileController extends Controller
     public function show(Request $request, User $url_user_id)
     {
         $chirps = $url_user_id->chirps()
-            ->with('user')
+            ->with(['user', 'likes']) // Load likes to prevent N+1 queries
+            ->withCount('likes')      // Add the likes_count attribute
             ->when($request->search, function ($query, $search) {
                 // Only search within THIS user's chirps
                 return $query->where('message', 'like', '%' . $search . '%');
@@ -23,7 +24,7 @@ class ProfileController extends Controller
 
         return view('view_chirper.show-chirps-in-profile', [
             'user' => $url_user_id,
-            'chirps' => $chirps
+            'chirps' => $chirps,
         ]);
     }
 

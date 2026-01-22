@@ -13,19 +13,21 @@ class ChirpController extends Controller
      */
     public function index(Request $request)
     {
-        $chirps = Chirp::with('user')
-        ->when($request->search, function ($query, $search) {
-            return $query
-            ->where('message', 'like', '%' . $search . '%')
-            ->orWhereHas('user', function ($q) use ($search) {
-                $q->where('name', 'like', '%' . $search . '%');
+        $chirps = Chirp::with(['user', 'likes']) // Added 'likes' here to eager load relationship
+            ->withCount('likes') // Adds a 'likes_count' attribute to each chirp automatically
+            ->when($request->search, function ($query, $search) {
+                return $query->where(function ($q) use ($search) { // Grouped where for cleaner SQL
+                    $q->where('message', 'like', '%' . $search . '%')
+                    ->orWhereHas('user', function ($innerQ) use ($search) {
+                        $innerQ->where('name', 'like', '%' . $search . '%');
+                    });
                 });
-        })
-        ->latest()
-        ->paginate(10)
-        ->onEachSide(1)
-        ->withQueryString();
-    
+            })
+            ->latest()
+            ->paginate(10)
+            ->onEachSide(1)
+            ->withQueryString();
+
         return view('view_chirper.view-home-chirper', ['chirps' => $chirps]);
     }
 

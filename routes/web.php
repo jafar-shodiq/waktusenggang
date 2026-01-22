@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Chirper\ChirpController;
+use App\Http\Controllers\Chirper\LikeController;
 use App\Http\Controllers\Chirper\ProfileController;
 use App\Http\Controllers\Auth\Register;
 use App\Http\Controllers\Auth\Login;
@@ -30,6 +31,9 @@ Route::prefix('url_chirper')
 
         Route::delete('/chirps/{url_chirp_id}', [ChirpController::class, 'destroy'])
             ->name('route_chirps.route_destroy');
+
+        Route::post('/chirps/{url_chirp_id}/like', [LikeController::class, 'toggle'])
+            ->name('route_chirps.route_like_toggle');
 });
 
 // Chirper - Profile
