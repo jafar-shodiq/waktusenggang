@@ -3,9 +3,27 @@
         Chirper
     </x-slot:title>
 
-    <div class="max-w-2xl mx-auto">
-        <h1 class="text-3xl font-bold mt-8">Chirper</h1>
-
+    <div class="max-w-2xl mx-auto px-4">
+        <div class="flex items-center justify-between mt-8 mb-6">
+            <h1 class="text-3xl font-black tracking-tighter">Chirper</h1>
+            
+            <a href="{{ route('route_chirper.route_profile.route_show', auth()->user()) }}" class="btn btn-outline btn-sm gap-2 rounded-full border-base-300 hover:bg-base-200 hover:text-base-content">
+                <div class="avatar">
+                    <div class="w-5 rounded-full">
+                        @if (auth()->user()->avatar_url)
+                            <img src="{{ auth()->user()->avatar_url }}" alt="{{ auth()->user()->name }}" />
+                        @else
+                            <div class="bg-neutral text-neutral-content flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                                </svg>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                My Profile
+            </a>
+        </div>
 
         <!-- Chirp Form -->
         <div class="card bg-base-100 shadow mt-8">
@@ -64,9 +82,5 @@
                     {{ $chirps->links() }}
             </div>
         </div>
-
-
-
-
     </div>
 </x-layout>

@@ -1,6 +1,19 @@
 <x-layout>
     <div class="max-w-2xl mx-auto mt-8 px-4">
 
+        {{-- Top Navigation & Title --}}
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-3xl font-black tracking-tighter">Chirper</h1>
+            
+            <a href="{{ route('route_chirper.route_home') }}" 
+               class="btn btn-ghost btn-sm gap-2 rounded-full border border-base-300 hover:border-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                </svg>
+                Home
+            </a>
+        </div>
+
         {{-- Profile Header Container --}}
         <div class="flex items-start justify-between mb-8 p-6 bg-base-100 rounded-2xl shadow-sm border border-base-200">
             <div class="flex items-center gap-6">
@@ -21,7 +34,10 @@
                     <div class="flex items-center gap-2 mt-1">
                         <span class="badge badge-ghost font-mono text-xs opacity-70">ID: {{ $user->id }}</span>
                         <span class="text-base-content/50 text-xs">·</span>
-                        <span class="text-base-content/50 text-xs uppercase font-bold tracking-tighter">Member</span>
+                        {{-- Added Dynamic Chirp Count --}}
+                        <span class="text-base-content/50 text-xs font-bold uppercase tracking-tighter">
+                            {{ $user->chirps()->count() }} {{ Str::plural('Chirp', $user->chirps()->count()) }}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -39,8 +55,8 @@
         
         <x-component-search-bar :action="route('route_chirper.route_profile.route_show', $user)" placeholder="Search {{ $user->name }}'s chirps..." />
 
+        {{-- Feed Section --}}
         <div class="space-y-4 mt-8">
-            {{-- Top Pagination (Small/Centered) --}}
             @if($chirps->hasPages())
                 <div class="flex justify-center mb-4 scale-90 opacity-80">
                     {{ $chirps->onEachSide(1)->links() }}
@@ -55,7 +71,6 @@
                 </div>
             @endforelse
 
-            {{-- Bottom Pagination --}}
             <div class="mt-8 flex justify-center">
                 {{ $chirps->onEachSide(1)->links() }}
             </div>
