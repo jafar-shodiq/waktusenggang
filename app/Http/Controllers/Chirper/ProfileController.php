@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    public function show(Request $request, User $user)
+    public function show(Request $request, User $user_id)
     {
-        $chirps = $user->chirps()
+        $chirps = $user_id->chirps()
             ->with('user')
             ->when($request->search, function ($query, $search) {
                 // Only search within THIS user's chirps
@@ -22,7 +22,7 @@ class ProfileController extends Controller
             ->withQueryString();
 
         return view('view_chirper.show-chirps-in-profile', [
-            'user' => $user,
+            'user' => $user_id,
             'chirps' => $chirps
         ]);
     }

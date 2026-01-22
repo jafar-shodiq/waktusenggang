@@ -4,21 +4,18 @@
 <div class="card bg-base-100 shadow">
     <div class="card-body">
         <div class="flex space-x-3">
-            @if ($passed_var_chirp->user)
-                <div class="avatar">
-                    <div class="size-10 rounded-full">
-                        <img src="https://avatars.laravel.cloud/{{ urlencode($passed_var_chirp->user->email) }}"
-                            alt="{{ $passed_var_chirp->user->name }}'s avatar" class="rounded-full" />
-                    </div>
+            <div class="avatar {{ !$passed_var_chirp->user ? 'placeholder' : '' }}">
+                <div class="size-10 rounded-full bg-neutral text-neutral-content flex items-center justify-center">
+                    @if ($passed_var_chirp->user && isset($passed_var_chirp->user->avatar_path))
+                        <img src="{{ asset('storage/' . $passed_var_chirp->user->avatar_path) }}" 
+                            alt="{{ $passed_var_chirp->user->name }}" />
+                    @else
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 opacity-50">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                        </svg>
+                    @endif
                 </div>
-            @else
-                <div class="avatar placeholder">
-                    <div class="size-10 rounded-full">
-                        <img src="https://avatars.laravel.cloud/f61123d5-0b27-434c-a4ae-c653c7fc9ed6?vibe=stealth"
-                            alt="Anonymous User" class="rounded-full" />
-                    </div>
-                </div>
-            @endif
+            </div>
 
             <div class="min-w-0 flex-1">
                 <div class="flex justify-between w-full">

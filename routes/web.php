@@ -15,7 +15,7 @@ Route::prefix('url_chirper')
     ->name('route_chirper.')
     ->group(function () {
 
-        Route::get('/profile/{user}', [ProfileController::class, 'show'])
+        Route::get('/profile/{user_id}', [ProfileController::class, 'show'])
             ->name('route_profile.route_show');
 });
 

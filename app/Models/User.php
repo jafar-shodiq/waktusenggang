@@ -51,4 +51,18 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the URL for the user's avatar.
+     */
+    public function getAvatarUrlAttribute(): ?string
+    {
+        // If an uploaded file exists in storage, return the full URL
+        if ($this->avatar_path) {
+            return asset('storage/' . $this->avatar_path);
+        }
+
+        // Return null so the frontend can display the SVG placeholder instead
+        return null;
+    }
 }
