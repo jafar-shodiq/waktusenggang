@@ -5,8 +5,7 @@
         <div class="flex items-center justify-between mb-6">
             <h1 class="text-3xl font-black tracking-tighter">Chirper</h1>
             
-            <a href="{{ route('route_chirper.route_home') }}" 
-               class="btn btn-ghost btn-sm gap-2 rounded-full border border-base-300 hover:border-primary">
+            <a href="{{ route('route_chirper.route_home') }}" class="btn btn-ghost btn-sm gap-2 rounded-full border border-base-300 hover:border-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
                 </svg>
@@ -18,7 +17,7 @@
         <div class="flex items-start justify-between mb-8 p-6 bg-base-100 rounded-2xl shadow-sm border border-base-200">
             <div class="flex items-center gap-6">
                 <div class="avatar placeholder">
-                    <div class="w-20 rounded-full bg-neutral text-neutral-content flex items-center justify-center ring ring-primary ring-offset-base-100 ring-offset-2">
+                    <div class="w-20 rounded-full bg-neutral text-neutral-content flex items-center justify-center">
                         @if ($user->avatar_url)
                             <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" />
                         @else
@@ -44,7 +43,7 @@
 
             {{-- The Edit Button --}}
             @if (auth()->id() === $user->id)
-                <a href="{{ route('route_chirper.route_profile.route_edit', $user) }}" class="btn btn-ghost btn-sm border-base-300 gap-2 hover:border-primary">
+                <a href="{{ route('route_chirper.route_profile.route_edit', $user) }}" class="btn btn-ghost btn-xs border-base-300 gap-2 hover:border-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
                     </svg>

@@ -70,31 +70,45 @@
         </div>
 
         <!-- Sidebar -->
-        <div class="drawer-side">
-            <label for="project-drawer" class="drawer-overlay"></label>
+<div class="drawer-side">
+    <label for="project-drawer" class="drawer-overlay"></label>
 
-            <aside class="w-64 bg-base-100 min-h-full">
-                <div class="p-4 font-semibold text-lg">
-                    Projects
-                </div>
-
-                <ul class="menu px-3">
-                    <li>
-                        <a href="{{ route('route_chirper.route_home') }}" class="active">
-                            🐦 Chirper
-                        </a>
-                    </li>
-
-                    <li class="disabled">
-                        <span>📋 Tasks (soon)</span>
-                    </li>
-
-                    <li class="disabled">
-                        <span>📝 Blog (soon)</span>
-                    </li>
-                </ul>
-            </aside>
+    <aside class="w-64 bg-base-100 min-h-full border-r border-base-200">
+        {{-- Sidebar Header: Title + Home Button --}}
+        <div class="flex items-center justify-between p-4 pb-2">
+            <span class="text-xs font-bold uppercase tracking-widest opacity-50">Projects</span>
+            
+            <a href="{{ route('home') }}" class="btn btn-ghost btn-xs gap-1 px-2 rounded-md hover:bg-primary hover:text-primary-content transition-colors" title="Back to Home">
+                <span class="text-[10px] uppercase font-bold">Home</span>
+            </a>
         </div>
+
+        <ul class="menu menu-md px-3 gap-1">
+            {{-- Chirper Link --}}
+            <li>
+                <a href="{{ route('route_chirper.route_home') }}" class="{{ request()->routeIs('route_chirper.*') ? 'active' : '' }}">
+                    <span class="w-6 text-center">🐦</span> 
+                    <span>Chirper</span>
+                </a>
+            </li>
+
+            {{-- Disabled Items --}}
+            <li class="disabled">
+                <div class="flex gap-2">
+                    <span class="w-6 text-center opacity-50">📋</span> 
+                    <span>ProjectXX (soon)</span>
+                </div>
+            </li>
+
+            <li class="disabled">
+                <div class="flex gap-2">
+                    <span class="w-6 text-center opacity-50">📝</span> 
+                    <span>ProjectYY (soon)</span>
+                </div>
+            </li>
+        </ul>
+    </aside>
+</div>
     </div>
 
 </body>
