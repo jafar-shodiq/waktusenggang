@@ -1,29 +1,40 @@
 <x-layout>
     <div class="max-w-2xl mx-auto mt-8 px-4">
 
-        <div class="flex items-center gap-6 mb-8 p-6 bg-base-100 rounded-2xl shadow-sm border border-base-200">
-            <div class="avatar placeholder">
-                <div class="w-20 rounded-full bg-neutral text-neutral-content flex items-center justify-center ring ring-primary ring-offset-base-100 ring-offset-2">
-                    @if ($user->avatar_url)
-                        {{-- This displays the uploaded image if it exists --}}
-                        <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" />
-                    @else
-                        {{-- Centered SVG Placeholder for users without an upload --}}
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10 opacity-50">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                        </svg>
-                    @endif
+        {{-- Profile Header Container --}}
+        <div class="flex items-start justify-between mb-8 p-6 bg-base-100 rounded-2xl shadow-sm border border-base-200">
+            <div class="flex items-center gap-6">
+                <div class="avatar placeholder">
+                    <div class="w-20 rounded-full bg-neutral text-neutral-content flex items-center justify-center ring ring-primary ring-offset-base-100 ring-offset-2">
+                        @if ($user->avatar_url)
+                            <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" />
+                        @else
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10 opacity-50">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                            </svg>
+                        @endif
+                    </div>
+                </div>
+                
+                <div>
+                    <h1 class="text-3xl font-black tracking-tight text-base-content">{{ $user->name }}</h1>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="badge badge-ghost font-mono text-xs opacity-70">ID: {{ $user->id }}</span>
+                        <span class="text-base-content/50 text-xs">·</span>
+                        <span class="text-base-content/50 text-xs uppercase font-bold tracking-tighter">Member</span>
+                    </div>
                 </div>
             </div>
-            
-            <div>
-                <h1 class="text-3xl font-black tracking-tight text-base-content">{{ $user->name }}</h1>
-                <div class="flex items-center gap-2 mt-1">
-                    <span class="badge badge-ghost font-mono text-xs opacity-70">ID: {{ $user->id }}</span>
-                    <span class="text-base-content/50 text-xs">·</span>
-                    <span class="text-base-content/50 text-xs">Chirper Member</span>
-                </div>
-            </div>
+
+            {{-- The Edit Button --}}
+            @if (auth()->id() === $user->id)
+                <a href="{{ route('route_chirper.route_profile.route_edit', $user) }}" class="btn btn-ghost btn-sm border-base-300 gap-2 hover:border-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                    </svg>
+                    Edit Profile
+                </a>
+            @endif
         </div>
         
         <x-component-search-bar :action="route('route_chirper.route_profile.route_show', $user)" placeholder="Search {{ $user->name }}'s chirps..." />

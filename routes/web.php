@@ -10,16 +10,7 @@ use App\Http\Controllers\Auth\Logout;
 Route::view('/', 'home')
     ->name('home');
 
-// No need auth
-Route::prefix('url_chirper')
-    ->name('route_chirper.')
-    ->group(function () {
-
-        Route::get('/profile/{user_id}', [ProfileController::class, 'show'])
-            ->name('route_profile.route_show');
-});
-
-// Need auth
+// Chirper - Main
 Route::prefix('url_chirper')
     ->middleware('auth')
     ->name('route_chirper.')
@@ -39,6 +30,22 @@ Route::prefix('url_chirper')
 
         Route::delete('/chirps/{url_chirp_id}', [ChirpController::class, 'destroy'])
             ->name('route_chirps.route_destroy');
+});
+
+// Chirper - Profile
+Route::prefix('url_chirper')
+    ->middleware('auth')
+    ->name('route_chirper.')
+    ->group(function () {
+
+        Route::get('/profile/{url_user_id}', [ProfileController::class, 'show'])
+            ->name('route_profile.route_show');
+
+        Route::get('/profile/{url_user_id}/edit', [ProfileController::class, 'edit'])
+            ->name('route_profile.route_edit');
+
+        Route::put('/profile/{url_user_id}', [ProfileController::class, 'update'])
+            ->name('route_profile.route_update');
 });
 
 
