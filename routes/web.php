@@ -50,6 +50,9 @@ Route::prefix('url_chirper')
 
         Route::put('/profile/{url_user_id}', [ProfileController::class, 'update'])
             ->name('route_profile.route_update');
+
+        Route::get('/profile/{url_user_id}/likes', [ProfileController::class, 'showLikes'])
+            ->name('route_profile.route_show_likes');
 });
 
 

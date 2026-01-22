@@ -51,6 +51,20 @@
                 </a>
             @endif
         </div>
+
+        <div class="flex gap-8 border-b border-base-300 mb-6">
+            {{-- Chirps Tab --}}
+            <a href="{{ route('route_chirper.route_profile.route_show', $user) }}" 
+            class="pb-4 text-sm font-bold transition-colors hover:text-primary {{ !isset($showingLikes) ? 'border-b-2 border-primary text-primary' : 'text-base-content/50' }}">
+                Chirps
+            </a>
+
+            {{-- Likes Tab --}}
+            <a href="{{ route('route_chirper.route_profile.route_show_likes', $user) }}" 
+            class="pb-4 text-sm font-bold transition-colors hover:text-primary {{ isset($showingLikes) ? 'border-b-2 border-primary text-primary' : 'text-base-content/50' }}">
+                Likes
+            </a>
+        </div>
         
         <x-component-search-bar :action="route('route_chirper.route_profile.route_show', $user)" placeholder="Search {{ $user->name }}'s chirps..." />
 

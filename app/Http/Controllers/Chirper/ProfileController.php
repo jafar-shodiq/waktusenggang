@@ -72,4 +72,24 @@ class ProfileController extends Controller
         return redirect()->route('route_chirper.route_profile.route_show', $url_user_id)
                         ->with('status', 'Profile Updated!');
     }
+
+    public function showLikes(Request $request, User $url_user_id)
+    {
+        $chirps = $url_user_id->likedChirps()
+            ->with(['user', 'likes']) 
+            ->withCount('likes')
+            ->when($request->search, function ($query, $search) {
+                return $query->where('message', 'like', '%' . $search . '%');
+            })
+            // The relationship in User model handles the "latest" sorting
+            ->paginate(10)
+            ->onEachSide(1)
+            ->withQueryString();
+
+        return view('view_chirper.show-chirps-in-profile', [
+            'user' => $url_user_id,
+            'chirps' => $chirps,
+            'showingLikes' => true, // Flag to identify which tab is active
+        ]);
+    }
 }
