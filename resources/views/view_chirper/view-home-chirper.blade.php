@@ -54,7 +54,11 @@
             </div>
         </div>
 
-        <x-component-search-bar :action="route('route_chirper.route_home')" placeholder="Search profiles or chirps..." />
+        <x-component-chirp-search-bar 
+            :action="route('route_chirper.route_home')" 
+            placeholder="Search profiles or chirps..."
+            type="left" 
+        />
 
         <!-- Feed -->
         <div class="space-y-4 mt-8">

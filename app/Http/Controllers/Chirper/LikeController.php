@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class LikeController extends Controller
 {
-public function toggle(Chirp $url_chirp_id)
+    public function toggle(Chirp $url_chirp_id)
     {
         $user = auth()->user();
 

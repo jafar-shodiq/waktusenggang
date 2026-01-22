@@ -1,7 +1,8 @@
 
 @props(['passed_var_chirp'])
 
-<div class="card bg-base-100 shadow">
+{{-- Added dynamic ID so the browser can scroll to this specific chirps --}}
+<div id="chirp-{{ $passed_var_chirp->id }}" class="card bg-base-100 shadow">
     <div class="card-body">
         <div class="flex space-x-3">
             <div class="avatar {{ !$passed_var_chirp->user ? 'placeholder' : '' }}">
@@ -55,8 +56,9 @@
                 <p class="mt-1">{{ $passed_var_chirp->message }}</p>
 
                 <div class="flex items-center mt-4">
-                    {{-- We use a form because "Like" is a data-changing (POST) action --}}
-                    <form method="POST" action="{{ route('route_chirper.route_chirps.route_like_toggle', $passed_var_chirp) }}">
+                    {{-- Use a form because "Like" is a data-changing (POST) action --}}
+                    {{-- Added the #anchor to the end of the route --}}
+                    <form method="POST" action="{{ route('route_chirper.route_chirps.route_like_toggle', $passed_var_chirp) }}#chirp-{{ $passed_var_chirp->id }}">
                         @csrf
                         <button type="submit" 
                             class="group flex items-center gap-1.5 text-sm transition-colors {{ $passed_var_chirp->likes->contains(auth()->id()) ? 'text-error' : 'text-base-content/50 hover:text-error' }}">

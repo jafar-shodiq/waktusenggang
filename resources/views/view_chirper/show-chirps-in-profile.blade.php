@@ -65,8 +65,12 @@
                 Likes
             </a>
         </div>
-        
-        <x-component-search-bar :action="route('route_chirper.route_profile.route_show', $user)" placeholder="Search {{ $user->name }}'s chirps..." />
+
+        <x-component-chirp-search-bar 
+            :action="route('route_chirper.route_profile.route_show', $user)" 
+            placeholder="Search {{ $user->name }}'s chirps..."
+            type="left" 
+        />
 
         {{-- Feed Section --}}
         <div class="space-y-4 mt-8">
